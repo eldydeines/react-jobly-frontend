@@ -1,0 +1,23 @@
+.home {
+    height: auto; 
+    width: 75%;
+    border: 10px solid #14213d; 
+    margin: 25px;
+    padding: 25px;
+    box-shadow: 10px 10px #888888;
+    border-radius: 20px;
+}
+
+h1 {
+    text-decoration: underline #14213d;
+}
+
+h2 {
+    text-align: center;
+}
+
+.home-button {
+    height: 50px;
+    width: 50%;
+    font-size: 1.5em;
+}

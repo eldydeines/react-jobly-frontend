@@ -9,7 +9,11 @@
     color: #fca311;
     font-size: 25px;
     font-weight: bold;
-
+    width: 50%;
+    align-content: center;
+}
+.navbar-nav{
+margin-right: 10px;
 }
 nav {
     background-color: #14213d;
@@ -55,3 +59,11 @@ nav a.active.navbar-brand {
 nav a:not(.navbar-brand):hover {
     font-weight: bold;
   }
+
+  .navbar-div{
+    margin-top: 10px;
+  }
+.navbar-span {
+  color: #f0f2f5;
+  font-style: italic;
+}

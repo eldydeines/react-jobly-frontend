@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import UserContext from "../UserContext";
 import { useHistory } from "react-router-dom";
 import Alerts from "./Alerts";
+import "../styling/Login.css";
 
 const Login = ({ loginUser }) => {
 
@@ -41,8 +42,10 @@ const Login = ({ loginUser }) => {
 
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className="login-div">
+            <h2>User Login</h2>
+
+            <form onSubmit={handleSubmit} className="login-form">
                 {hasLoginErrors
                     ? <Alerts messages={errors} />
                     : null
@@ -65,6 +68,7 @@ const Login = ({ loginUser }) => {
                 />
                 <button onSubmit={handleSubmit}>Login</button>
             </form>
+
         </div>
     )
 }

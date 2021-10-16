@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import UserContext from "../UserContext";
 import Alerts from "./Alerts";
+import "../styling/Signup.css";
 
 const Signup = ({ registerUser }) => {
 
@@ -41,8 +42,9 @@ const Signup = ({ registerUser }) => {
 
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className="signup-div">
+            <h2>Sign Up</h2>
+            <form className="signup-form" onSubmit={handleSubmit}>
                 {hasErrors
                     ? <Alerts messages={errors} />
                     : null

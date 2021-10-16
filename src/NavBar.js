@@ -6,7 +6,7 @@ import UserContext from "./UserContext";
 
 function NavBar({ logOut }) {
 
-    const { isLoggedIn } = useContext(UserContext);
+    const { username, isLoggedIn } = useContext(UserContext);
     const history = useHistory();
     const handleClick = () => {
         logOut();
@@ -21,23 +21,27 @@ function NavBar({ logOut }) {
                         Jobly
                     </NavLink>
                 </div>
-                <Nav expand="md">
-                    {/* NavBar now includes nav links to Drinks */}
-                    <div className="navbar-nav">
-                        <NavItem>
-                            <NavLink to="/companies">Companies</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink to="/jobs">Jobs</NavLink>
-                        </NavItem>
+                <div className="navbar-nav">
+                    <Nav expand="md">
+                        {/* NavBar now includes nav links to Drinks */}
                         {isLoggedIn
                             ? (<>
                                 <NavItem>
-                                    <NavLink to="/profile">Profile</NavLink><span></span>
+                                    <NavLink to="/companies">Companies</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <button onClick={handleClick}>Logout</button>
+                                    <NavLink to="/jobs">Jobs</NavLink>
                                 </NavItem>
+
+                                <NavItem>
+                                    <NavLink to="/profile">Profile</NavLink><span></span>
+                                </NavItem>
+                                <div className="navbar-div">
+                                    <span className="navbar-span">Logged In: {username}</span>
+                                    <NavItem>
+                                        <button onClick={handleClick}>Logout</button>
+                                    </NavItem>
+                                </div>
                             </>)
                             : (<><NavItem>
                                 <NavLink to="/login">Login</NavLink>
@@ -48,8 +52,9 @@ function NavBar({ logOut }) {
                             </>)
                         }
 
-                    </div>
-                </Nav>
+
+                    </Nav>
+                </div>
             </Navbar>
         </div>
     );
