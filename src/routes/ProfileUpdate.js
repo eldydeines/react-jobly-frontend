@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import JoblyApi from '../routes/api';
-import Alerts from "./Alerts";
-import useToggle from "../helpers/useToggle";
 
 const ProfileUpdate = ({ username, email, firstName, lastName, resetJobs, setIsUpdate, setProfile, updateUser }) => {
 

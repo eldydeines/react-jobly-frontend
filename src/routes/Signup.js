@@ -1,13 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import UserContext from "../UserContext";
-import Alerts from "./Alerts";
 import "../styling/Signup.css";
 
 const Signup = ({ registerUser }) => {
 
-    const { isLoggedIn } = useContext(UserContext);
-    const history = useHistory();
+
 
     const INITIAL_STATE = {
         username: '',
@@ -17,6 +14,7 @@ const Signup = ({ registerUser }) => {
         email: ''
     }
 
+    const history = useHistory();
     const [formData, setFormData] = useState(INITIAL_STATE);
     const [hasErrors, setHasErrors] = useState(false);
     const [formErrors, setFormErrors] = useState([]);
@@ -35,13 +33,13 @@ const Signup = ({ registerUser }) => {
         let response = await registerUser({ ...formData });
         if (response.message === "success") {
             history.push("/companies");
+            setFormData(INITIAL_STATE);
         }
         else {
             setHasErrors(true);
             let newErrors = response.message;
             setFormErrors(newErrors.map(n => n));
         }
-        setFormData(INITIAL_STATE);
     }
 
 

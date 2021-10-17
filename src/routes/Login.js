@@ -1,7 +1,5 @@
-import React, { useState, useContext } from "react";
-import UserContext from "../UserContext";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import Alerts from "./Alerts";
 import "../styling/Login.css";
 
 const Login = ({ loginUser }) => {
@@ -12,12 +10,8 @@ const Login = ({ loginUser }) => {
     }
 
     const [formData, setFormData] = useState(INITIAL_STATE);
-
-    const { user } = useContext(UserContext);
     const history = useHistory();
-
     const [hasLoginErrors, setHasLoginErrors] = useState(false);
-    const [formErrors, setFormErrors] = useState([]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -36,7 +30,6 @@ const Login = ({ loginUser }) => {
         }
         else {
             setHasLoginErrors(true);
-            setFormErrors(["Incorrect Username or Password"]);
         }
         setFormData(INITIAL_STATE);
     }
