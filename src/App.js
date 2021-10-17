@@ -1,3 +1,10 @@
+// App script provides the initial rendering of children components. 
+// Uopon initial rendering, we check to see if the user has a token in the browser session.
+// We decrypt the token and use the data to rerender the user's session.
+// If not, we ask the user to login or signup and cannot proceed until one of these actions is completed. 
+// Upon successful login/signup, user data will be saved to global variable of "USER"
+// If not successful, we will send back the errors for it to be displayed on child component. 
+
 import './App.css';
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter } from "react-router-dom";
@@ -21,7 +28,9 @@ function App() {
   const [session, setSession] = useLocalStorage("token");
 
 
-  //on load - if token exists in local storage, persist on site.
+  //On load: if token exists in local storage, persist on site.
+  //--get token, decrypt it, and then save data to USER state.
+  // If error, send back errors to the console..
   useEffect(() => {
     async function getData(username) {
       let data = await JoblyApi.getUserProfile(username);
@@ -46,6 +55,9 @@ function App() {
     }
   }, [setUser, session]);
 
+  //We register users with this function to Jobly Api, which posts to the backend.
+  //If successful, save USER with data, save new token, and return success message. 
+  //IF unsucessful, return errors. 
   const registerUser = async (formData) => {
 
     try {
@@ -70,6 +82,9 @@ function App() {
     }
   }
 
+  //Users can update their profile with this function, which posts to the back end on Jobly Api call.
+  //If successful, save USER with data and return success message. 
+  //IF unsucessful, return errors. 
   const updateUser = async (formData, username) => {
     try {
       await JoblyApi.updateUserProfile({ ...formData }, username);
@@ -91,6 +106,9 @@ function App() {
     }
   }
 
+  //LoginUser gives the user the ability to login. Data is checked on Jobly APi to the backend.
+  //If successful, save USER with data, save new token, and return success message. 
+  //IF unsucessful, return errors. 
   const loginUser = async (formData) => {
     try {
       await JoblyApi.login(formData);
@@ -111,6 +129,7 @@ function App() {
     }
   }
 
+  //Logout will reset the session token to null for the user and will remove their data from the app instance.
   const logOut = () => {
     setUser(INITIAL_STATE);
     setSession(null);

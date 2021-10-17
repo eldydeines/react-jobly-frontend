@@ -1,10 +1,13 @@
+// React Router will help navigate different routes for the jobly app
+// based on whether the user is logged in or not. 
+// This will prevent users from access unauthorized paths. 
+
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import JobsList from "./routes/JobsList";
 import CompaniesList from "./routes/CompaniesList";
 import CompanyDetail from "./routes/CompanyDetail";
 import Home from "./routes/Home";
-import NotFound from "./routes/NotFound";
 import { useContext } from "react";
 import Login from "./routes/Login";
 import Signup from "./routes/Signup";

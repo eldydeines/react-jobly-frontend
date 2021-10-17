@@ -1,3 +1,8 @@
+//Profile Update is the component where the user can update their profile information.
+//If data does not meet the conditions of the backend, they will be informed of the errors. 
+//Data is populated based on the profile to ensure with the exception of the password field.
+//If successful, the profile is updated and they will be redirected to the profile home page.
+
 import React, { useState } from "react";
 
 const ProfileUpdate = ({ username, email, firstName, lastName, resetJobs, setIsUpdate, setProfile, updateUser }) => {
@@ -13,6 +18,7 @@ const ProfileUpdate = ({ username, email, firstName, lastName, resetJobs, setIsU
     const [hasErrors, setHasErrors] = useState(false);
     const [formErrors, setFormErrors] = useState([]);
 
+    //This handles the inputs as they are entered in by the user and saves to state. 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(formData => ({
@@ -21,6 +27,7 @@ const ProfileUpdate = ({ username, email, firstName, lastName, resetJobs, setIsU
         }))
     };
 
+    //This handles the submission by the user and will either be successful or not. 
     const handleSubmit = async (e) => {
 
         e.preventDefault();

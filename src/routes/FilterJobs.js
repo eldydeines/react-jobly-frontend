@@ -1,3 +1,8 @@
+//FilterJobs component provides a form that a user can filter jobs on. 
+//The filters will be sent to the backend. 
+//If jobs are found with those filters, those will be shown here. 
+//A user can also clear filters to see all jobs.
+
 import React, { useState } from "react";
 import "../styling/FilterJobs.css";
 
@@ -11,6 +16,7 @@ const FilterJobsForm = ({ findJobs, resetJobsList }) => {
 
     const [formData, setFormData] = useState(INITIAL_STATE);
 
+    //This handles the inputs as they are entered in by the user and saves to state. 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(formData => ({
@@ -19,6 +25,7 @@ const FilterJobsForm = ({ findJobs, resetJobsList }) => {
         }))
     };
 
+    //This handles the submission by the user and will either be successful or not. 
     const handleSubmit = (e) => {
         e.preventDefault();
         findJobs({ ...formData });

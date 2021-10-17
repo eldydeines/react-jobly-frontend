@@ -1,3 +1,8 @@
+//Job Card component is used on JobsList Component and Company Detail Component. 
+//It shows the information about the job. 
+//It will also render a button if the user can apply.
+//IT will not show the button, if the user has applied to the job previously.
+
 import React, { useContext, useEffect, useState } from "react";
 import { Card, CardBody, CardTitle, CardText } from "reactstrap";
 import "../styling/JobCard.css";
@@ -12,7 +17,6 @@ const JobCard = ({ id, title, salary, equity, name }) => {
     const [hasApplied, setHasApplied] = useState(false);
 
     const apply = async () => {
-
         try {
             let data = await JoblyApi.applyToJob(username, id);
             setHasApplied(true);

@@ -1,5 +1,9 @@
+//Profile shows the user's information that is saved in the backend.
+//It also shows the jobs that they have applied to if any. 
+//The data is updated upon new jobs being added throughout the app. 
+//The user can also choose to update their profile here.
+
 import React, { useState, useEffect, useContext } from "react";
-import { useHistory } from "react-router-dom";
 import JoblyApi from "./api";
 import UserContext from "../UserContext";
 import ProfileUpdate from "./ProfileUpdate";
@@ -13,6 +17,7 @@ const Profile = ({ updateUser }) => {
     const [profileJobs, setProfileJobs] = useState([]);
     const { username, jobs } = useContext(UserContext);
 
+    //upon load, the app will get the jobs on the user global profile and add the job information to display.
     useEffect(function () {
         async function getProfile() {
             try {
@@ -38,6 +43,7 @@ const Profile = ({ updateUser }) => {
         getProfile();
     }, [username]);
 
+    //when users add jobs, this will ensure jobs are updated on the profile or else the data becomes stagnant.
     const resetJobs = async () => {
         if (jobs.length > 0) {
             let jobList = await JoblyApi.getJobs();
@@ -62,7 +68,6 @@ const Profile = ({ updateUser }) => {
                     <h3>Last Name: {profile.lastName}</h3>
                     <h3>Email: {profile.email}</h3>
                     <button onClick={setIsUpdate}>Update Profile</button>
-
                     <section>
                         <h2>Your Submitted Applications:</h2>
                         {profileJobs.map(j =>
@@ -73,7 +78,6 @@ const Profile = ({ updateUser }) => {
                     </section>
                 </>)
             }
-
         </div>
     )
 }

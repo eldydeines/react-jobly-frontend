@@ -1,3 +1,7 @@
+//Companies list component renders all companies that are in the app backend database. 
+//A user can filter using the inputs in the child component "FilterCompanies".
+//A user can click on a company to go to its company detail.
+
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import JoblyApi from "./api";
@@ -9,7 +13,7 @@ const CompaniesList = () => {
 
     const [companies, setCompanies] = useState([]);
 
-
+    //upon intial render, get all companies
     useEffect(function () {
         async function getCompanies() {
             try {
@@ -23,6 +27,7 @@ const CompaniesList = () => {
         getCompanies();
     }, []);
 
+    //this will render companies with the filter
     const findCompanies = async (formData) => {
         try {
             let data = await JoblyApi.getFilteredCompanies(formData);
@@ -33,6 +38,7 @@ const CompaniesList = () => {
         }
     }
 
+    //this will clear the filter and provide all companies
     const resetCompaniesList = async () => {
         try {
             let data = await JoblyApi.getCompanies();

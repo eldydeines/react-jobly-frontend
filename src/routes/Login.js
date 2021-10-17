@@ -1,3 +1,7 @@
+//Login form that is provided to user to add their username and password.
+//This child component will send data to parent to check if they can be logged in or not.
+//If unsuccessful, they will be told there is a problem.
+
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "../styling/Login.css";
@@ -13,6 +17,7 @@ const Login = ({ loginUser }) => {
     const history = useHistory();
     const [hasLoginErrors, setHasLoginErrors] = useState(false);
 
+    //This handles the inputs as they are entered in by the user and saves to state. 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(formData => ({
@@ -21,6 +26,7 @@ const Login = ({ loginUser }) => {
         }))
     };
 
+    //This handles the submission by the user and will either be successful or not. 
     const handleSubmit = async (e) => {
 
         e.preventDefault();
@@ -33,8 +39,6 @@ const Login = ({ loginUser }) => {
         }
         setFormData(INITIAL_STATE);
     }
-
-
 
     return (
         <div className="login-div">

@@ -1,3 +1,8 @@
+//Jobslist component renders all jobs that are in the app backend database. 
+//A user can filter using the inputs in the child component "FilterJobs".
+//A user can also click on a button to apply.
+//If a user has applied, the job card will show it has been applied to and will not show the button.
+
 import React, { useState, useEffect } from "react";
 import JoblyApi from "./api";
 import JobCard from "./JobCard";
@@ -7,6 +12,7 @@ const JobsList = () => {
 
     const [jobs, setJobs] = useState([]);
 
+    //upon initial load, show all jobs.
     useEffect(function () {
         async function getJobs() {
             try {
@@ -20,6 +26,7 @@ const JobsList = () => {
         getJobs();
     }, []);
 
+    //If there is a filter applied, re-render the component.
     const findJobs = async (formData) => {
         try {
             let data = await JoblyApi.getFilteredJobs(formData);
@@ -30,6 +37,8 @@ const JobsList = () => {
         }
     }
 
+    //If the user choosed to clear the filter, the "clear button" click 
+    // will call this function to reset the jobs list.
     const resetJobsList = async () => {
         try {
             let data = await JoblyApi.getJobs();

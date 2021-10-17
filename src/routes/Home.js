@@ -1,4 +1,7 @@
 // Home component is the splash page for the app. 
+// It will render a login/signup elements if the user is not logged.
+// It will render companies/jobs elements if the user is logged id.
+// This also the default for any redirects and broken links
 
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";

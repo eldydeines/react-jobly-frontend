@@ -1,3 +1,8 @@
+//Company Detail Component provides the detail about a company
+//and shows all jobs currently provided by the company.
+//If user has not applied to a job, a button will appear to allow them to apply.
+//If user has applied, it will show that they have applied to the job.
+
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import JoblyApi from "./api";
@@ -12,6 +17,7 @@ const CompanyDetail = () => {
     const [companyJobs, setCompanyJobs] = useState([]);
     const [hasJobs, setHasJobs] = useState(false);
 
+    //upon intial render, get all jobs on the company profile and their profile to display.
     useEffect(function () {
         async function getCompanyDetail() {
             try {

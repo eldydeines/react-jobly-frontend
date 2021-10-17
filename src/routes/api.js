@@ -56,6 +56,7 @@ class JoblyApi {
     let res = await this.request(`jobs/`);
     return res.jobs;
   }
+  //Get filtered jobs
   static async getFilteredJobs(formData) {
     let res = await this.request(`jobs/`, formData);
     return res.jobs;
@@ -66,6 +67,7 @@ class JoblyApi {
     this.setToken(res.token);
     return res.data;
   }
+
   //let user register
   static async register(formData) {
     let res = await this.request(`auth/register`, formData, 'post');
@@ -86,7 +88,6 @@ class JoblyApi {
   //let user apply to a job
   static async applyToJob(username, id) {
     let formData = { username: username, id: id };
-    console.log(username, id);
     let res = await this.request(`users/${username}/jobs/${id}`, formData, 'post');
     return res;
   }

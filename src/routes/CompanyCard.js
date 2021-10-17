@@ -1,3 +1,6 @@
+//Company card is a child component for companies list. This will show individual
+//companies. If they have a logo, it will be displayed.
+
 import React from "react";
 import { Card, CardBody, CardTitle, CardText } from "reactstrap";
 import "../styling/CompanyCard.css";

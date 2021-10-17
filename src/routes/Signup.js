@@ -1,10 +1,13 @@
+//Signup component provides the form to register with the app.
+//The data is sent to a parent function and awaits the response upon submission.
+//If a response is successful, the user is logged in and sent to the home page.
+//If response is unsuccessful, the errors are provided to the user so they can fix. 
+
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "../styling/Signup.css";
 
 const Signup = ({ registerUser }) => {
-
-
 
     const INITIAL_STATE = {
         username: '',
@@ -19,6 +22,7 @@ const Signup = ({ registerUser }) => {
     const [hasErrors, setHasErrors] = useState(false);
     const [formErrors, setFormErrors] = useState([]);
 
+    //This handles the inputs as they are entered in by the user and saves to state. 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(formData => ({
@@ -27,6 +31,7 @@ const Signup = ({ registerUser }) => {
         }))
     };
 
+    //This handles the submission by the user and will either be successful or not. 
     const handleSubmit = async (e) => {
 
         e.preventDefault();
@@ -41,7 +46,6 @@ const Signup = ({ registerUser }) => {
             setFormErrors(newErrors.map(n => n));
         }
     }
-
 
     return (
         <div className="signup-div">
@@ -97,7 +101,6 @@ const Signup = ({ registerUser }) => {
                 />
                 <button type="submit" onSubmit={handleSubmit}>Signup</button>
             </form>
-
         </div >
     )
 

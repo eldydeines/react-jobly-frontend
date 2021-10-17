@@ -1,3 +1,10 @@
+// Navbar provides the navigation in the Navbar of the app.
+// It will show navlinks based on whether a user is logged in or not.
+// In order to determine this, it looks at the user profile's "isLoggedIn" status.
+// If a user is logged in, the user will see the log out button, which will log the user 
+// out from the session on the app script and will push them to the home page
+// using windows history object. 
+
 import React, { useContext } from "react";
 import "./NavBar.css";
 import { NavLink, useHistory } from "react-router-dom";
@@ -51,8 +58,6 @@ function NavBar({ logOut }) {
                                 </NavItem>
                             </>)
                         }
-
-
                     </Nav>
                 </div>
             </Navbar>
