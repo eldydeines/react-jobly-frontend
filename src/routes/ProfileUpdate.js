@@ -3,7 +3,7 @@ import JoblyApi from '../routes/api';
 import Alerts from "./Alerts";
 import useToggle from "../helpers/useToggle";
 
-const ProfileUpdate = ({ username, email, firstName, lastName, setIsUpdate, setProfile }) => {
+const ProfileUpdate = ({ username, email, firstName, lastName, resetJobs, setIsUpdate, setProfile, updateUser }) => {
 
     const INITIAL_STATE = {
         email: email,
@@ -13,8 +13,8 @@ const ProfileUpdate = ({ username, email, firstName, lastName, setIsUpdate, setP
     }
 
     const [formData, setFormData] = useState(INITIAL_STATE);
-    const [hasErrors, setHasErrors] = useToggle(false);
-    const [errors, setErrors] = useState([]);
+    const [hasErrors, setHasErrors] = useState(false);
+    const [formErrors, setFormErrors] = useState([]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -27,23 +27,19 @@ const ProfileUpdate = ({ username, email, firstName, lastName, setIsUpdate, setP
     const handleSubmit = async (e) => {
 
         e.preventDefault();
-        try {
-            let data = await JoblyApi.updateUserProfile({ ...formData }, username);
+        let response = await updateUser({ ...formData }, username);
+        if (response.message === "success") {
             setFormData(INITIAL_STATE);
+            setProfile({ ...formData, username: username });
             setIsUpdate();
-            setProfile(data);
+            resetJobs();
         }
-        catch (e) {
-            if (e.message) {
-                let formErrors = e.message;
-                setErrors(formErrors);
-            }
-            else {
-                setErrors(e);
-            }
-            setHasErrors();
+        else {
+            setHasErrors(true);
+            let newErrors = response.message;
+            setFormErrors(newErrors.map(n => n));
         }
-
+        setFormData(INITIAL_STATE);
     };
 
     return (
@@ -51,7 +47,11 @@ const ProfileUpdate = ({ username, email, firstName, lastName, setIsUpdate, setP
             <h1>Update Profile for {username} </h1>
             <form onSubmit={handleSubmit}>
                 {hasErrors
-                    ? <Alerts messages={errors} />
+                    ? (<div>We have a problem Houston!
+                        <ul>
+                            {formErrors.map(m => <li>{m}</li>)}
+                        </ul>
+                    </div>)
                     : null
                 }
                 <label htmlFor="password">Password </label>
@@ -87,6 +87,7 @@ const ProfileUpdate = ({ username, email, firstName, lastName, setIsUpdate, setP
                     onChange={handleChange}
                 />
                 <button type="submit" onSubmit={handleSubmit} >Update</button>
+                <button onClick={() => setIsUpdate()}>Cancel</button>
             </form>
         </div>
     )

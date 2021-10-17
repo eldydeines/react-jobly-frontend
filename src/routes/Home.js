@@ -15,13 +15,13 @@ function Home() {
             <h2>Job App Made for You</h2>
             {isLoggedIn
                 ? (<>
-                    <button className="home-button"><NavLink exact to="/companies">Companies</NavLink></button>
-                    <button className="home-button"><NavLink exact to="/jobs">Jobs</NavLink></button>
+                    <NavLink exact to="/companies"><button className="home-button">Companies</button></NavLink>
+                    <NavLink exact to="/jobs"><button className="home-button">Jobs</button></NavLink>
                 </>)
                 : (<>
                     <h2>Please login or sign up to access companies and jobs!</h2>
-                    <button className="home-button"><NavLink exact to="/login">Login</NavLink></button>
-                    <button className="home-button"><NavLink exact to="/signup">Signup</NavLink></button>
+                    <NavLink exact to="/login"><button className="home-button">Login</button></NavLink>
+                    <NavLink exact to="/signup"><button className="home-button">Signup</button></NavLink>
                 </>)
             }
 

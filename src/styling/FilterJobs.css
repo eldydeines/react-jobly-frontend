@@ -1,14 +1,14 @@
-form {
+.filter-jobs-div form {
     margin: 10px;
     width: 100%;
     justify-content: center;
 }
-label {
+.filter-jobs-div label {
     font-size: 1em;
     display:inline;
     font-weight: bold;
 }
-input{
+.filter-jobs-div input{
     border-radius: 5px;
     border-color: #e5e5e5;
     height: 20px;
@@ -17,14 +17,15 @@ input{
     margin-right: 10px;
     margin-left: 5px;
 }
-button {
+.filter-jobs-div button {
     border-radius: 5px;
     border-color: #e5e5e5;
     height: 30px;
     background-color: #fca311;
     font-weight: bold;
+    width: 25%;
 }
 
-button:hover{
+.filter-jobs-div button:hover{
     background-color: #e5e5e5;
 }

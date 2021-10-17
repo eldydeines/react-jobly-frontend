@@ -46,8 +46,8 @@ const CompaniesList = () => {
     return (
         <div className="Companies">
             <h1>Companies</h1>
-            <FilterCompaniesForm findCompanies={findCompanies} />
-            <button onClick={resetCompaniesList}>Clear Filter</button>
+            <FilterCompaniesForm findCompanies={findCompanies} resetCompaniesList={resetCompaniesList} />
+
             {companies.map(c =>
             (
                 <Link to={`companies/${c.handle}`} key={c.handle}>

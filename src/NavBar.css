@@ -60,10 +60,11 @@ nav a:not(.navbar-brand):hover {
     font-weight: bold;
   }
 
-  .navbar-div{
+.navbar-div{
     margin-top: 10px;
   }
 .navbar-span {
   color: #f0f2f5;
   font-style: italic;
 }
+

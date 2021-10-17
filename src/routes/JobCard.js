@@ -17,6 +17,9 @@ const JobCard = ({ id, title, salary, equity, name }) => {
             let data = await JoblyApi.applyToJob(username, id);
             setHasApplied(true);
             console.log("Success", data, jobs);
+            console.log("current Jobs", jobs);
+            jobs.push(id);
+            console.log("job added", jobs);
         }
         catch (e) {
             console.log("Errors from job application: ", e);

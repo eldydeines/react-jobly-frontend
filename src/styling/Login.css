@@ -9,16 +9,9 @@
 }
 
 
-.login-form input {
-    display: block;
-    justify-content: center;
-    width: 250px;
-}
-
 .login-form button {
     display: block;
-    width: 100px;
-    height: 30px;
+    padding: 5px;
+    height: auto;
     font-size: 1em;
 }
-

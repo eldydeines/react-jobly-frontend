@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../styling/FilterJobs.css";
 
-const FilterJobsForm = ({ findJobs }) => {
+const FilterJobsForm = ({ findJobs, resetJobsList }) => {
 
     const INITIAL_STATE = {
         hasEquity: "",
@@ -26,35 +26,38 @@ const FilterJobsForm = ({ findJobs }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="title">Job Title </label>
-            <input
-                id="title"
-                type="text"
-                name="title"
-                placeholder="Job to search for"
-                value={formData.title}
-                onChange={handleChange}
-            />
-            <label htmlFor="minSalary">Minimum Salary</label>
-            <input
-                id="minSalary"
-                type="number"
-                name="minSalary"
-                min="1"
-                value={formData.minSalary}
-                onChange={handleChange}
-            />
-            <label htmlFor="hasEquity">Equity?</label>
-            <input
-                id="hasEquity"
-                type="checkbox"
-                name="hasEquity"
-                value={formData.hasEquity}
-                onChange={handleChange}
-            />
-            <button>Find Jobs</button>
-        </form>
+        <div className="filter-jobs-div">
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="title">Job Title </label>
+                <input
+                    id="title"
+                    type="text"
+                    name="title"
+                    placeholder="Job to search for"
+                    value={formData.title}
+                    onChange={handleChange}
+                />
+                <label htmlFor="minSalary">Minimum Salary</label>
+                <input
+                    id="minSalary"
+                    type="number"
+                    name="minSalary"
+                    min="1"
+                    value={formData.minSalary}
+                    onChange={handleChange}
+                />
+                <label htmlFor="hasEquity">Equity?</label>
+                <input
+                    id="hasEquity"
+                    type="checkbox"
+                    name="hasEquity"
+                    value={formData.hasEquity}
+                    onChange={handleChange}
+                />
+                <button>Find Jobs</button>
+                <button onClick={() => resetJobsList()}>Clear Filter</button>
+            </form>
+        </div>
     )
 
 }

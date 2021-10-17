@@ -6,7 +6,7 @@ import "../styling/Signup.css";
 
 const Signup = ({ registerUser }) => {
 
-    const { isLoggedIn, errors } = useContext(UserContext);
+    const { isLoggedIn } = useContext(UserContext);
     const history = useHistory();
 
     const INITIAL_STATE = {
@@ -19,6 +19,7 @@ const Signup = ({ registerUser }) => {
 
     const [formData, setFormData] = useState(INITIAL_STATE);
     const [hasErrors, setHasErrors] = useState(false);
+    const [formErrors, setFormErrors] = useState([]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -31,11 +32,14 @@ const Signup = ({ registerUser }) => {
     const handleSubmit = async (e) => {
 
         e.preventDefault();
-        try {
-            await registerUser({ ...formData });
+        let response = await registerUser({ ...formData });
+        if (response.message === "success") {
             history.push("/companies");
-        } catch (e) {
+        }
+        else {
             setHasErrors(true);
+            let newErrors = response.message;
+            setFormErrors(newErrors.map(n => n));
         }
         setFormData(INITIAL_STATE);
     }
@@ -46,7 +50,11 @@ const Signup = ({ registerUser }) => {
             <h2>Sign Up</h2>
             <form className="signup-form" onSubmit={handleSubmit}>
                 {hasErrors
-                    ? <Alerts messages={errors} />
+                    ? (<div>We have a problem Houston!
+                        <ul>
+                            {formErrors.map(m => <li>{m}</li>)}
+                        </ul>
+                    </div>)
                     : null
                 }
                 <label htmlFor="username">Username </label>

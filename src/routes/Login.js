@@ -13,10 +13,11 @@ const Login = ({ loginUser }) => {
 
     const [formData, setFormData] = useState(INITIAL_STATE);
 
-    const { errors } = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const history = useHistory();
 
     const [hasLoginErrors, setHasLoginErrors] = useState(false);
+    const [formErrors, setFormErrors] = useState([]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -29,12 +30,13 @@ const Login = ({ loginUser }) => {
     const handleSubmit = async (e) => {
 
         e.preventDefault();
-        try {
-            await loginUser({ ...formData });
+        let response = await loginUser({ ...formData });
+        if (response.message === "success") {
             history.push("/companies");
         }
-        catch (e) {
+        else {
             setHasLoginErrors(true);
+            setFormErrors(["Incorrect Username or Password"]);
         }
         setFormData(INITIAL_STATE);
     }
@@ -44,10 +46,9 @@ const Login = ({ loginUser }) => {
     return (
         <div className="login-div">
             <h2>User Login</h2>
-
             <form onSubmit={handleSubmit} className="login-form">
                 {hasLoginErrors
-                    ? <Alerts messages={errors} />
+                    ? <h3>Oh, oh! <br></br>Incorrect username or password.</h3>
                     : null
                 }
                 <label htmlFor="username">Username </label>

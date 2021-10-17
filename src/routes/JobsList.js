@@ -11,7 +11,7 @@ const JobsList = () => {
         async function getJobs() {
             try {
                 let data = await JoblyApi.getJobs();
-                setJobs(data);
+                setJobs(data.map(d => d));
             }
             catch (e) {
                 console.log(e);
@@ -23,7 +23,7 @@ const JobsList = () => {
     const findJobs = async (formData) => {
         try {
             let data = await JoblyApi.getFilteredJobs(formData);
-            setJobs(data);
+            setJobs(data.map(d => d));
         }
         catch (e) {
             console.log(e);
@@ -33,7 +33,7 @@ const JobsList = () => {
     const resetJobsList = async () => {
         try {
             let data = await JoblyApi.getJobs();
-            setJobs(data);
+            setJobs(data.map(d => d));
         }
         catch (e) {
             console.log(e);
@@ -43,8 +43,7 @@ const JobsList = () => {
     return (
         <div className="jobs">
             <h1>Jobs</h1>
-            <FilterJobsForm findJobs={findJobs} />
-            <button onClick={resetJobsList}>Clear Filter</button>
+            <FilterJobsForm findJobs={findJobs} resetJobsList={resetJobsList} />
             {jobs.map(j =>
             (
                 <JobCard key={j.id} id={j.id} handle={j.companyHandle} title={j.title} salary={j.salary} equity={j.equity} name={j.companyName} />
